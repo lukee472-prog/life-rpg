@@ -1,10 +1,23 @@
-const quests = [
-  { name: "Training", xp: 50, coins: 15, icon: "⚡" },
-  { name: "Clean bedroom", xp: 20, coins: 5, icon: "🧹" },
-  { name: "Life RPG Development", xp: 30, coins: 10, icon: "⚔️" },
-];
+import { supabase } from "../lib/supabase";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+const questIcons = {
+  fitness: "⚡",
+  cleaning: "🧹",
+  development: "⚔️",
+  general: "📜",
+};
+
+export default async function Home() {
+  const { data: quests, error } = await supabase
+    .from("quests")
+    .select("*")
+    .eq("status", "active")
+    .order("created_at", { ascending: true });
+
+  const activeQuests = quests ?? [];
+
   return (
     <main className="shell">
       <header className="heroHeader">
@@ -12,6 +25,7 @@ export default function Home() {
           <p className="eyebrow">LIFE RPG</p>
           <h1>Your adventure awaits.</h1>
         </div>
+
         <div className="levelBadge">LVL 1</div>
       </header>
 
@@ -31,19 +45,29 @@ export default function Home() {
       <section className="questSection">
         <div className="sectionTitle">
           <h2>Today's Quests</h2>
-          <span>0 / 3</span>
+          <span>0 / {activeQuests.length}</span>
         </div>
 
-        {quests.map((quest) => (
-          <article className="card quest" key={quest.name}>
+        {error && (
+          <article className="card quest">
+            <div className="questInfo">
+              <h3>⚠️ Quest connection failed</h3>
+              <p>Unable to load quests from the realm.</p>
+            </div>
+          </article>
+        )}
+
+        {activeQuests.map((quest) => (
+          <article className="card quest" key={quest.id}>
             <button className="questButton">○</button>
 
             <div className="questInfo">
               <h3>
-                {quest.icon} {quest.name}
+                {questIcons[quest.category] ?? "📜"} {quest.title}
               </h3>
+
               <p>
-                +{quest.xp} XP · +{quest.coins} coins
+                +{quest.xp_reward} XP · +{quest.coin_reward} coins
               </p>
             </div>
           </article>
