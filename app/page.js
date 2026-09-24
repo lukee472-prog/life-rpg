@@ -10,11 +10,13 @@ const questIcons = {
 };
 
 export default async function Home() { 
-const { data: player } = await supabase
+const { data: player, error: playerError } = await supabase
     .from("player_state")
     .select("level, xp, coins")
     .limit(1)
     .single();
+  console.log("PLAYER:", player);
+console.log("PLAYER ERROR:", playerError);
 
   const level = player?.level ?? 1;
   const xp = player?.xp ?? 0;
