@@ -9,7 +9,16 @@ const questIcons = {
   general: "📜",
 };
 
-export default async function Home() {
+export default async function Home() { 
+const { data: player } = await supabase
+    .from("player_state")
+    .select("level, xp, coins")
+    .limit(1)
+    .single();
+
+  const level = player?.level ?? 1;
+  const xp = player?.xp ?? 0;
+  const coins = player?.coins ?? 0;
   const { data: quests, error } = await supabase
     .from("quests")
     .select("*")
@@ -26,13 +35,13 @@ export default async function Home() {
           <h1>Your adventure awaits.</h1>
         </div>
 
-        <div className="levelBadge">LVL 1</div>
+        <div className="levelBadge">LVL {level}</div>
       </header>
 
       <section className="card progressCard">
         <div className="statRow">
-          <strong>⭐ 0 / 100 XP</strong>
-          <strong>🪙 0</strong>
+          <strong>⭐ {xp} / 100 XP</strong>
+          <strong>🪙 {coins}</strong>
         </div>
 
         <div className="xpBar">
