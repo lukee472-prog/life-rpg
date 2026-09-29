@@ -1,5 +1,5 @@
 import { supabase } from "../lib/supabase";
-
+import { completeQuest } from "./actions";
 export const dynamic = "force-dynamic";
 
 const questIcons = {
@@ -70,7 +70,9 @@ console.log("PLAYER ERROR:", playerError);
 
         {activeQuests.map((quest) => (
           <article className="card quest" key={quest.id}>
-            <button className="questButton">○</button>
+            <form action={completeQuest.bind(null, quest.id)}>
+  <button className="questButton" type="submit">○</button>
+</form>
 
             <div className="questInfo">
               <h3>
