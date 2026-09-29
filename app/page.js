@@ -1,5 +1,5 @@
 import { supabase } from "../lib/supabase";
-import { completeQuest } from "./actions";
+import { completeQuest } from "./action";
 export const dynamic = "force-dynamic";
 
 const questIcons = {
