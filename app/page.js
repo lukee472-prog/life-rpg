@@ -33,8 +33,13 @@ const activeQuests = allQuests.filter(
   (quest) => quest.status === "active"
 );
 
+const today = new Date().toISOString().slice(0, 10);
+
 const completedQuests = allQuests.filter(
-  (quest) => quest.status === "completed" && quest.completed_at
+  (quest) =>
+    quest.status === "completed" &&
+    quest.completed_at &&
+    quest.completed_at.slice(0, 10) === today
 );
 
 const todaysQuests = [...activeQuests, ...completedQuests];
