@@ -18,16 +18,26 @@ const { data: player, error: playerError } = await supabase
   console.log("PLAYER:", player);
 console.log("PLAYER ERROR:", playerError);
 
-  const level = player?.level ?? 1;
-  const xp = player?.xp ?? 0;
-  const coins = player?.coins ?? 0;
-  const { data: quests, error } = await supabase
-    .from("quests")
-    .select("*")
-    .eq("status", "active")
-    .order("created_at", { ascending: true });
+const level = player?.level ?? 1;
+const xp = player?.xp ?? 0;
+const coins = player?.coins ?? 0;
 
-  const activeQuests = quests ?? [];
+const { data: quests, error } = await supabase
+  .from("quests")
+  .select("*")
+  .order("created_at", { ascending: true });
+
+const allQuests = quests ?? [];
+
+const activeQuests = allQuests.filter(
+  (quest) => quest.status === "active"
+);
+
+const completedQuests = allQuests.filter(
+  (quest) => quest.status === "completed" && quest.completed_at
+);
+
+const todaysQuests = [...activeQuests, ...completedQuests];
 
   return (
     <main className="shell">
@@ -56,7 +66,7 @@ console.log("PLAYER ERROR:", playerError);
       <section className="questSection">
         <div className="sectionTitle">
           <h2>Today's Quests</h2>
-          <span>0 / {activeQuests.length}</span>
+          <span>{completedQuests.length} / {todaysQuests.length}</span>
         </div>
 
         {error && (
