@@ -29,22 +29,20 @@ const { data: quests, error } = await supabase
 
 const allQuests = quests ?? [];
 
-const activeQuests = allQuests.filter(
+const today = new Date().toISOString().slice(0, 10);
+
+const todaysQuests = allQuests.filter(
+  (quest) => quest.quest_date === today
+);
+
+const activeQuests = todaysQuests.filter(
   (quest) => quest.status === "active"
 );
 
-const today = new Date().toISOString().slice(0, 10);
-
-const completedQuests = allQuests.filter(
-  (quest) =>
-    quest.status === "completed" &&
-    quest.completed_at &&
-    quest.completed_at.slice(0, 10) === today
+const completedQuests = todaysQuests.filter(
+  (quest) => quest.status === "completed"
 );
-
-const todaysQuests = [...activeQuests, ...completedQuests];
-
-  return (
+return ( 
     <main className="shell">
       <header className="heroHeader">
         <div>
