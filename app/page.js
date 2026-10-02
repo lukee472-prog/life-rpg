@@ -21,7 +21,8 @@ console.log("PLAYER ERROR:", playerError);
 const level = player?.level ?? 1;
 const xp = player?.xp ?? 0;
 const coins = player?.coins ?? 0;
-
+const xpNeeded = 1000 + ((level - 1) * 250);
+const xpProgress = Math.min(100, Math.max(0, (xp / xpNeeded) * 100));
 const { data: quests, error } = await supabase
   .from("quests")
   .select("*")
@@ -55,12 +56,12 @@ return (
 
       <section className="card progressCard">
         <div className="statRow">
-          <strong>⭐ {xp} / 100 XP</strong>
+          <strong>⭐ {xp} / {xpNeeded} XP</strong>
           <strong>🪙 {coins}</strong>
         </div>
 
         <div className="xpBar">
-          <div className="xpFill" />
+          <div className="xpFill" style={{ width: `${xpProgress}%` }} />
         </div>
 
         <p className="muted">Your next level awaits.</p>
