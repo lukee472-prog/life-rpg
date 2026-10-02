@@ -15,3 +15,19 @@ export async function completeQuest(questId) {
 
   revalidatePath("/");
 }
+
+
+export async function sendGameMasterMessage(formData) {
+  const message = formData.get("message")?.toString().trim();
+
+  if (!message) {
+    return;
+  }
+
+  console.log("GAME MASTER MESSAGE:", message);
+
+  return {
+    success: true,
+    message: `Message received: "${message}"`,
+  };
+}
