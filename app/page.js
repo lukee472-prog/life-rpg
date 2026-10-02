@@ -1,5 +1,6 @@
 import { supabase } from "../lib/supabase";
 import { completeQuest } from "./action";
+import GameMasterForm from "./GameMasterForm";
 export const dynamic = "force-dynamic";
 
 const questIcons = {
