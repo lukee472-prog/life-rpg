@@ -105,10 +105,15 @@ return (
         <p className="eyebrow">GAME MASTER</p>
         <h2>What happened?</h2>
 
-        <div className="gmInput">
-          <span>Made £240, trained and spent £20 on fuel...</span>
-          <strong>➤</strong>
-        </div>
+        <form className="gmInput">
+  <input
+    name="message"
+    type="text"
+    placeholder="Tell the Game Master what happened..."
+    autoComplete="off"
+  />
+  <button type="submit">➤</button>
+</form>
 
         <p className="muted">
           Tell the Game Master what happened in your real life.
