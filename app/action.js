@@ -17,17 +17,18 @@ export async function completeQuest(questId) {
 }
 
 
-export async function sendGameMasterMessage(formData) {
+export async function sendGameMasterMessage(previousState, formData) {
   const message = formData.get("message")?.toString().trim();
 
   if (!message) {
-    return;
+    return {
+      message: "",
+    };
   }
 
   console.log("GAME MASTER MESSAGE:", message);
 
   return {
-    success: true,
     message: `Message received: "${message}"`,
   };
 }
