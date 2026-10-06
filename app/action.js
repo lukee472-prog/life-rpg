@@ -60,8 +60,7 @@ If the message is not asking to create a quest, return:
       };
     }
 
-    const data = await response.json();
-    console.log("OPENAI SUCCESS:", JSON.stringify(data));
+   const data = await response.json();
 
 const reply = data.output
   ?.filter((item) => item.type === "message")
@@ -71,8 +70,57 @@ const reply = data.output
   .join("\n")
   .trim();
 
+if (!reply) {
+  return { message: "The Game Master has nothing to say." };
+}
+
+let command;
+
+try {
+  command = JSON.parse(reply);
+} catch {
+  return { message: "The Game Master couldn't understand that command." };
+}
+
+if (command.action === "create_quest") {
+  const rewards = {
+    tiny: { xp: 50, coins: 15 },
+    small: { xp: 100, coins: 25 },
+    medium: { xp: 200, coins: 50 },
+    hard: { xp: 400, coins: 100 },
+    epic: { xp: 1000, coins: 250 },
+  };
+
+  const reward = rewards[command.difficulty] ?? rewards.small;
+
+  const today = new Date().toISOString().slice(0, 10);
+
+  const { error } = await supabase.from("quests").insert({
+    title: command.title,
+    category: command.category,
+    status: "active",
+    xp_reward: reward.xp,
+    coin_reward: reward.coins,
+    quest_date: today,
+  });
+
+  if (error) {
+    console.error("CREATE QUEST ERROR:", error);
+
+    return {
+      message: "I understood the quest, but couldn't add it.",
+    };
+  }
+
+  revalidatePath("/");
+
+  return {
+    message: `Quest added: ${command.title} — +${reward.xp} XP · +${reward.coins} coins`,
+  };
+}
+
 return {
-  message: reply || "The Game Master has nothing to say.",
+  message: command.reply || "Tell me what you'd like to do.",
 };
   } catch (error) {
     console.error("GAME MASTER ERROR:", error);
