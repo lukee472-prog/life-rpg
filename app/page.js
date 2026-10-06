@@ -31,7 +31,12 @@ const { data: quests, error } = await supabase
 
 const allQuests = quests ?? [];
 
-const today = new Date().toISOString().slice(0, 10);
+const today = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/London",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(new Date());
 
 const todaysQuests = allQuests.filter(
   (quest) => quest.quest_date === today
