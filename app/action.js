@@ -41,6 +41,9 @@ Your job is to understand what the player wants to do in real life.
 If the player wants to add or plan a task, return ONLY valid JSON in exactly this format:
 {"action":"create_quest","title":"Quest title","category":"fitness","difficulty":"medium"}
 
+If the player says they have completed, finished, or done a task, return ONLY valid JSON in exactly this format:
+{"action":"complete_quest","title":"Quest title"}
+
 Allowed categories: fitness, cleaning, development, general.
 Allowed difficulties: tiny, small, medium, hard, epic.
 
@@ -117,7 +120,46 @@ if (command.action === "create_quest") {
     message: `Quest added: ${command.title} — +${reward.xp} XP · +${reward.coins} coins`,
   };
 }
+if (command.action === "complete_quest") {
+  const today = new Date().toISOString().slice(0, 10);
 
+  const { data: activeQuests, error: questError } = await supabase
+    .from("quests")
+    .select("id, title, xp_reward, coin_reward")
+    .eq("status", "active")
+    .eq("quest_date", today);
+
+  if (questError) {
+    console.error("FIND QUEST ERROR:", questError);
+    return { message: "I couldn't check your active quests." };
+  }
+
+  const quest = activeQuests?.find(
+    (item) =>
+      item.title.toLowerCase() === command.title.toLowerCase()
+  );
+
+  if (!quest) {
+    return {
+      message: `I couldn't find an active quest called "${command.title}".`,
+    };
+  }
+
+  const { error: completeError } = await supabase.rpc("complete_quest", {
+    p_quest_id: quest.id,
+  });
+
+  if (completeError) {
+    console.error("COMPLETE QUEST ERROR:", completeError);
+    return { message: "I found the quest, but couldn't complete it." };
+  }
+
+  revalidatePath("/");
+
+  return {
+    message: `Quest complete: ${quest.title} — +${quest.xp_reward} XP · +${quest.coin_reward} coins`,
+  };
+}
 return {
   message: command.reply || "Tell me what you'd like to do.",
 };
