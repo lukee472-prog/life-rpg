@@ -94,7 +94,7 @@ Do not claim XP, coins, quests, or completions have changed.
 The backend handles all game state.
 
 If there is no action to perform, return:
-{"actions":[],"reply":"Your short Game Master response here."}`
+{"actions":[],"reply":"Your short Game Master response here."}`,
         input: message,
       }),
     });
