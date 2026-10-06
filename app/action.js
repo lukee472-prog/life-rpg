@@ -77,7 +77,7 @@ Do not claim XP, coins, quests, or completions have changed. The backend handles
 
 If the message is neither creating nor completing a quest, return:
 {"action":"none","reply":"Your short Game Master response here."}`
-        ',
+        `,
         input: message,
       }),
     });
