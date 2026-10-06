@@ -93,7 +93,17 @@ For new quests, choose a short clear title and appropriate category and difficul
 Do not claim XP, coins, quests, or completions have changed.
 The backend handles all game state.
 
-If there is no action to perform, return:
+If the player asks what quests, tasks, jobs, or things they still have left to do today, answer using ONLY TODAY'S ACTIVE QUESTS above.
+
+Do not invent quests or mention completed quests.
+
+If there are active quests, return:
+{"actions":[],"reply":"You still have: Quest 1, Quest 2."}
+
+If there are no active quests, return:
+{"actions":[],"reply":"You've completed everything for today."}
+
+For any other message where there is no action to perform, return:
 {"actions":[],"reply":"Your short Game Master response here."}`,
         input: message,
       }),
