@@ -95,14 +95,13 @@ if (command.action === "create_quest") {
 
   const today = new Date().toISOString().slice(0, 10);
 
-  const { error } = await supabase.from("quests").insert({
-    title: command.title,
-    category: command.category,
-    status: "active",
-    xp_reward: reward.xp,
-    coin_reward: reward.coins,
-    quest_date: today,
-  });
+  const { error } = await supabase.rpc("create_quest", {
+  p_title: command.title,
+  p_category: command.category,
+  p_xp_reward: reward.xp,
+  p_coin_reward: reward.coins,
+  p_quest_date: today,
+});
 
   if (error) {
     console.error("CREATE QUEST ERROR:", error);
