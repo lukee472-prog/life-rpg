@@ -53,8 +53,9 @@ if (activeQuestError) {
 }
 
 const questList = (activeQuests ?? [])
-  .map((quest) => `${quest.id}: ${quest.title} — ${quest.quest_date}`)
+  .map((quest) => `${quest.id}: ${quest.title} - ${quest.quest_date}`)
   .join("\n");
+  
   try {
     const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
