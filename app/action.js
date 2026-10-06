@@ -76,8 +76,7 @@ For new quests, choose a short clear title and appropriate category and difficul
 Do not claim XP, coins, quests, or completions have changed. The backend handles all game state.
 
 If the message is neither creating nor completing a quest, return:
-{"action":"none","reply":"Your short Game Master response here."}`
-        `,
+{"action":"none","reply":"Your short Game Master response here."}`,
         input: message,
       }),
     });
