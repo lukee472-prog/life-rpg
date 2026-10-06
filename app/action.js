@@ -48,9 +48,17 @@ export async function sendGameMasterMessage(previousState, formData) {
 
     const data = await response.json();
 
-    return {
-      message: data.output_text || "The Game Master has nothing to say.",
-    };
+const reply = data.output
+  ?.filter((item) => item.type === "message")
+  .flatMap((item) => item.content ?? [])
+  .filter((item) => item.type === "output_text")
+  .map((item) => item.text)
+  .join("\n")
+  .trim();
+
+return {
+  message: reply || "The Game Master has nothing to say.",
+};
   } catch (error) {
     console.error("GAME MASTER ERROR:", error);
 
