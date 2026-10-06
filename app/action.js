@@ -23,8 +23,23 @@ export async function sendGameMasterMessage(previousState, formData) {
   if (!message) {
     return { message: "" };
   }
-const today = new Date().toISOString().slice(0, 10);
+const ukDate = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/London",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(new Date());
 
+const today = ukDate;
+const tomorrowDate = new Date();
+tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+
+const tomorrow = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/London",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(tomorrowDate);
 const { data: todaysActiveQuests, error: activeQuestError } =
   await supabase
     .from("quests")
@@ -61,8 +76,24 @@ The player may describe ONE OR MULTIPLE things in the same message.
 Always return this structure:
 {"actions":[],"reply":""}
 
-If the player wants to add a new task, add:
-{"action":"create_quest","title":"Quest title","category":"fitness","difficulty":"medium"}
+If the player wants to add or plan a new task, include the calendar date it should happen:
+{"action":"create_quest","title":"Quest title","category":"fitness","difficulty":"medium","quest_date":"YYYY-MM-DD"}
+
+Today's date in the player's timezone is ${today}.
+
+Interpret dates from normal language.
+
+Examples:
+"Add a run tomorrow" = the next calendar day.
+"I have a run Wednesday" = the next appropriate Wednesday.
+"Dentist next Friday" = the Friday of next week.
+"Clean the car on the 15th" = the next appropriate 15th.
+"Add meditation today" = today's date.
+
+If the player gives no day or date, use today's date.
+
+Always return quest_date in YYYY-MM-DD format.
+Never return a date earlier than today unless the player is clearly describing something that already happened.
 
 If the player clearly completed one of today's active quests, add:
 {"action":"complete_quest","quest_id":123}
@@ -163,7 +194,10 @@ for (const action of actions) {
       p_category: action.category,
       p_xp_reward: reward.xp,
       p_coin_reward: reward.coins,
-      p_quest_date: today,
+      p_quest_date:
+  /^\d{4}-\d{2}-\d{2}$/.test(action.quest_date)
+    ? action.quest_date
+    : today,
     });
 
     if (error) {
