@@ -52,7 +52,7 @@ if (activeQuestError) {
   console.error("ACTIVE QUEST ERROR:", activeQuestError);
 }
 
-const quest = todaysActiveQuests?.find(
+const questList = (activeQuests ?? [])
   .map((quest) => `${quest.id}: ${quest.title} — ${quest.quest_date}`)
   .join("\n");
   try {
