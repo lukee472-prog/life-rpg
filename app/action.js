@@ -61,6 +61,7 @@ If the message is not asking to create a quest, return:
     }
 
     const data = await response.json();
+    console.log("OPENAI SUCCESS:", JSON.stringify(data));
 
 const reply = data.output
   ?.filter((item) => item.type === "message")
