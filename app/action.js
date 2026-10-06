@@ -40,19 +40,20 @@ const tomorrow = new Intl.DateTimeFormat("en-CA", {
   month: "2-digit",
   day: "2-digit",
 }).format(tomorrowDate);
-const { data: todaysActiveQuests, error: activeQuestError } =
+const { data: activeQuests, error: activeQuestError } =
   await supabase
     .from("quests")
-    .select("id, title")
+    .select("id, title, quest_date")
     .eq("status", "active")
-    .eq("quest_date", today);
+    .gte("quest_date", today)
+    .order("quest_date", { ascending: true });
 
 if (activeQuestError) {
   console.error("ACTIVE QUEST ERROR:", activeQuestError);
 }
 
-const questList = (todaysActiveQuests ?? [])
-  .map((quest) => `${quest.id}: ${quest.title}`)
+const questList = (activeQuests ?? [])
+  .map((quest) => `${quest.id}: ${quest.title} — ${quest.quest_date}`)
   .join("\n");
   try {
     const response = await fetch("https://api.openai.com/v1/responses", {
@@ -94,7 +95,12 @@ If the player gives no day or date, use today's date.
 
 Always return quest_date in YYYY-MM-DD format.
 Never return a date earlier than today unless the player is clearly describing something that already happened.
+If the player wants to move, postpone, reschedule, push, or change the date of an existing quest, return:
+{"action":"reschedule_quest","quest_id":123,"quest_date":"YYYY-MM-DD"}
 
+The quest_id MUST be the ID of the existing quest the player means.
+Interpret the new date from normal language using today's date above.
+Only reschedule when you are confident which quest the player means.
 If the player clearly completed one of today's active quests, add:
 {"action":"complete_quest","quest_id":123}
 
@@ -210,7 +216,7 @@ for (const action of actions) {
   }
 
   if (action.action === "complete_quest") {
-    const quest = todaysActiveQuests?.find(
+    const quest = activeQuests?.find(
       (item) => item.id === Number(action.quest_id)
     );
 
@@ -234,6 +240,32 @@ for (const action of actions) {
 
     results.push(`Quest complete: ${quest.title}`);
   }
+  if (action.action === "reschedule_quest") {
+  const quest = activeQuests?.find(
+    (item) => item.id === Number(action.quest_id)
+  );
+
+  if (!quest) {
+    results.push("I couldn't confidently match that quest.");
+    continue;
+  }
+
+  const { error: rescheduleError } = await supabase.rpc(
+    "reschedule_quest",
+    {
+      p_quest_id: quest.id,
+      p_quest_date: action.quest_date,
+    }
+  );
+
+  if (rescheduleError) {
+    console.error("RESCHEDULE QUEST ERROR:", rescheduleError);
+    results.push(`Couldn't reschedule: ${quest.title}`);
+    continue;
+  }
+
+  results.push(`Quest moved: ${quest.title} → ${action.quest_date}`);
+}
 }
 
 if (results.length > 0) {
