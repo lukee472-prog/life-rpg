@@ -104,6 +104,13 @@ If the player wants to move, postpone, reschedule, push, or change the date of a
 The quest_id MUST be the ID of the existing quest the player means.
 Interpret the new date from normal language using today's date above.
 Only reschedule when you are confident which quest the player means.
+If the player wants to edit, rename, or change an existing active quest, return:
+{"action":"update_quest","quest_id":123,"title":"New quest title"}
+
+The quest_id MUST be the ID of the existing active quest being changed.
+Use meaning, not exact wording, to identify the quest.
+Only include fields the player actually wants changed.
+Do not create a new quest when the player is clearly changing an existing one.
 If the player clearly completed one of today's active quests, add:
 {"action":"complete_quest","quest_id":123}
 
@@ -243,6 +250,36 @@ for (const action of actions) {
 
     results.push(`Quest complete: ${quest.title}`);
   }
+  
+  if (action.action === "update_quest") {
+  const quest = activeQuests?.find(
+    (item) => item.id === Number(action.quest_id)
+  );
+
+  if (!quest) {
+    results.push("I couldn't confidently match that quest.");
+    continue;
+  }
+
+  const { error: updateError } = await supabase.rpc(
+    "update_quest",
+    {
+      p_quest_id: quest.id,
+      p_title: action.title ?? null,
+      p_category: action.category ?? null,
+    }
+  );
+
+  if (updateError) {
+    console.error("UPDATE QUEST ERROR:", updateError);
+    results.push(`Couldn't update: ${quest.title}`);
+    continue;
+  }
+
+  results.push(
+    `Quest updated: ${quest.title}${action.title ? ` → ${action.title}` : ""}`
+  );
+}
   if (action.action === "reschedule_quest") {
   const quest = activeQuests?.find(
     (item) => item.id === Number(action.quest_id)
