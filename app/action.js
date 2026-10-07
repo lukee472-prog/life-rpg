@@ -69,9 +69,12 @@ const questList = (activeQuests ?? [])
 
 Your job is to understand what the player wants to do in their real life and return ONLY valid JSON.
 
-TODAY'S ACTIVE QUESTS:
+ACTIVE QUESTS (including overdue and future quests):
 ${questList || "No active quests."}
 
+Quest dates are shown beside each quest.
+For rescheduling, you may use ANY quest in this list, including overdue quests.
+For completing quests, only use quests dated today.
 The player may describe ONE OR MULTIPLE things in the same message.
 
 Always return this structure:
