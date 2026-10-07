@@ -109,7 +109,7 @@ If they clearly completed multiple quests, include each completion as a separate
 Example:
 {"actions":[{"action":"complete_quest","quest_id":123},{"action":"complete_quest","quest_id":456}],"reply":""}
 
-The quest_id MUST be an ID from TODAY'S ACTIVE QUESTS.
+For rescheduling, the quest_id may be any existing active quest ID from the ACTIVE QUESTS list, including overdue or future quests. For completing quests, only use quests dated today.
 Never invent a quest ID.
 Use meaning, not exact wording.
 
