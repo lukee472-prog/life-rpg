@@ -45,7 +45,6 @@ const { data: activeQuests, error: activeQuestError } =
     .from("quests")
     .select("id, title, quest_date")
     .eq("status", "active")
-    .gte("quest_date", today)
     .order("quest_date", { ascending: true });
 
 if (activeQuestError) {
