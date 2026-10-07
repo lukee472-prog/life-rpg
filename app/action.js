@@ -111,6 +111,14 @@ The quest_id MUST be the ID of the existing active quest being changed.
 Use meaning, not exact wording, to identify the quest.
 Only include fields the player actually wants changed.
 Do not create a new quest when the player is clearly changing an existing one.
+If the player wants to cancel, remove, drop, or no longer do an existing active quest, return:
+{"action":"cancel_quest","quest_id":123}
+
+The quest_id MUST be the ID of the existing active quest being cancelled.
+Use meaning, not exact wording, to identify the quest.
+Do not mark a cancelled quest as completed.
+Do not award XP or coins for cancelling a quest.
+Only cancel when you are confident which quest the player means.
 If the player clearly completed one of today's active quests, add:
 {"action":"complete_quest","quest_id":123}
 
@@ -279,6 +287,32 @@ for (const action of actions) {
   results.push(
     `Quest updated: ${quest.title}${action.title ? ` → ${action.title}` : ""}`
   );
+}
+
+if (action.action === "cancel_quest") {
+  const quest = activeQuests?.find(
+    (item) => item.id === Number(action.quest_id)
+  );
+
+  if (!quest) {
+    results.push("I couldn't confidently match that quest.");
+    continue;
+  }
+
+  const { error: cancelError } = await supabase.rpc(
+    "cancel_quest",
+    {
+      p_quest_id: quest.id,
+    }
+  );
+
+  if (cancelError) {
+    console.error("CANCEL QUEST ERROR:", cancelError);
+    results.push(`Couldn't cancel: ${quest.title}`);
+    continue;
+  }
+
+  results.push(`Quest cancelled: ${quest.title}`);
 }
   if (action.action === "reschedule_quest") {
   const quest = activeQuests?.find(
