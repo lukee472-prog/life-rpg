@@ -1,8 +1,8 @@
-
 import Link from "next/link";
 import { supabase } from "../lib/supabase";
 import { completeQuest } from "./action";
 import GameMasterForm from "./GameMasterForm";
+import LivingWorld from "./LivingWorld";
 
 export const dynamic = "force-dynamic";
 
@@ -321,29 +321,7 @@ export default async function Home({ searchParams }) {
         </div>
       </section>
 
-      <section style={{
-        ...styles.card,
-        minHeight: 190,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background:
-          "linear-gradient(135deg, #244b73, #17283e 60%, #533c2b)",
-      }}>
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 46 }}>🧍🐕</div>
-          <h3 style={{ marginBottom: 6 }}>
-            Your Living World
-          </h3>
-          <p style={{
-            color: "#c2d0df",
-            fontSize: 13,
-            margin: 0,
-          }}>
-            Character and room coming next
-          </p>
-        </div>
-      </section>
+      <LivingWorld />
 
       <section>
         <div style={{
