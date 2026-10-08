@@ -158,19 +158,33 @@ h3 {
   font-size: 24px;
 }
 
+
 .gmInput {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  width: 100%;
   gap: 10px;
-  margin-bottom: 10px;
-  padding: 14px;
-  border: 1px solid #373b47;
-  border-radius: 13px;
-  background: #0d0f15;
-  color: #7f8592;
-  font-size: 13px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
 }
+
+.gmInput input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  font-size: 16px;
+  color: white;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.gmInput button {
+  flex-shrink: 0;
+}
+
 
 .gmInput strong {
   color: #ddbd72;
