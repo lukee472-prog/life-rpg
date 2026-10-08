@@ -15,13 +15,39 @@ export default function GameMasterForm() {
 
   return (
     <>
-      <form className="gmInput" action={formAction}>
-        <input
-          name="message"
-          type="text"
-          placeholder="Tell the Game Master what happened..."
-          autoComplete="off"
-        />
+      
+<form
+  action={formAction}
+  style={{
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    gap: 10,
+  }}
+>
+
+        
+
+<button
+  type="submit"
+  disabled={pending}
+  style={{
+    flexShrink: 0,
+    background: "#1689ff",
+    color: "#ffffff",
+    border: "none",
+    borderRadius: 14,
+    padding: "11px 16px",
+    fontSize: 18,
+    fontWeight: "bold",
+    cursor: "pointer",
+    opacity: pending ? 0.6 : 1,
+  }}
+>
+  {pending ? "..." : "➤"}
+</button>
+
+
 
         <button type="submit" disabled={pending}>
           {pending ? "..." : "➤"}
