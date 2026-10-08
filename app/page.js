@@ -150,7 +150,14 @@ export default async function Home({ searchParams }) {
   );
 
   return (
-    <main style={styles.page}>
+    <main
+  style={{
+    ...styles.page,
+    position: "relative",
+    isolation: "isolate",
+    background: "transparent",
+  }}
+>
       <header style={{
         display: "flex",
         justifyContent: "space-between",
