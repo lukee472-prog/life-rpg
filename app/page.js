@@ -49,6 +49,26 @@ const activeQuests = todaysQuests.filter(
 const completedQuests = todaysQuests.filter(
   (quest) => quest.status === "completed"
 );
+
+const pastQuests = allQuests
+  .filter(
+    (quest) =>
+      quest.quest_date < today &&
+      quest.status === "active"
+  )
+  .sort((a, b) =>
+    b.quest_date.localeCompare(a.quest_date)
+  );
+
+const upcomingQuests = allQuests
+  .filter(
+    (quest) =>
+      quest.quest_date > today &&
+      quest.status === "active"
+  )
+  .sort((a, b) =>
+    a.quest_date.localeCompare(b.quest_date)
+  );
 return ( 
     <main className="shell">
       <header className="heroHeader">
@@ -107,6 +127,47 @@ return (
         ))}
       </section>
 
+<section className="questSection">
+  <div className="sectionTitle">
+    <h2>⏳ Past Quests</h2>
+    <span>{pastQuests.length}</span>
+  </div>
+
+  {pastQuests.length === 0 && (
+    <p className="muted">No overdue quests.</p>
+  )}
+
+  {pastQuests.map((quest) => (
+    <article className="card quest" key={quest.id}>
+      <div className="questInfo">
+        <h3>{questIcons[quest.category] ?? "📜"} {quest.title}</h3>
+        <p>Overdue · {quest.quest_date}</p>
+        <p>+{quest.xp_reward} XP · +{quest.coin_reward} Coins</p>
+      </div>
+    </article>
+  ))}
+</section>
+
+<section className="questSection">
+  <div className="sectionTitle">
+    <h2>📅 Upcoming Quests</h2>
+    <span>{upcomingQuests.length}</span>
+  </div>
+
+  {upcomingQuests.length === 0 && (
+    <p className="muted">No upcoming quests.</p>
+  )}
+
+  {upcomingQuests.map((quest) => (
+    <article className="card quest" key={quest.id}>
+      <div className="questInfo">
+        <h3>{questIcons[quest.category] ?? "📜"} {quest.title}</h3>
+        <p>Scheduled · {quest.quest_date}</p>
+        <p>+{quest.xp_reward} XP · +{quest.coin_reward} Coins</p>
+      </div>
+    </article>
+  ))}
+</section>
       <section className="card gameMaster">
         <p className="eyebrow">GAME MASTER</p>
         <h2>What happened?</h2>
