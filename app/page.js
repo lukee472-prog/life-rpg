@@ -157,7 +157,18 @@ export default async function Home({ searchParams }) {
     isolation: "isolate",
     background: "transparent",
   }}
+> 
+<div
+  style={{
+    position: "fixed",
+    inset: 0,
+    zIndex: -1,
+    overflow: "hidden",
+    pointerEvents: "none",
+  }}
 >
+  <LivingWorld />
+</div>
       <header style={{
         display: "flex",
         justifyContent: "space-between",
@@ -328,7 +339,6 @@ export default async function Home({ searchParams }) {
         </div>
       </section>
 
-      <LivingWorld />
 
       <section>
         <div style={{
