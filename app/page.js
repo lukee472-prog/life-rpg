@@ -465,35 +465,24 @@ export default async function Home({ searchParams }) {
         })}
       </section>
 
-      <section style={{
-        ...styles.card,
-        marginTop: 28,
-        background:
-          "linear-gradient(135deg, #163c72, #152642)",
-      }}>
-        <div style={{
-          color: "#ffc247",
-          fontWeight: "bold",
-          letterSpacing: 2,
-          fontSize: 12,
-        }}>
-          ✨ GAME MASTER
-        </div>
+      
+<section
+  style={{
+    position: "fixed",
+    bottom: 82,
+    left: 12,
+    right: 12,
+    zIndex: 20,
+    padding: "10px 12px",
+    background: "rgba(8, 20, 39, 0.94)",
+    border: "1px solid #304767",
+    borderRadius: 18,
+    boxShadow: "0 8px 30px #0008",
+  }}
+>
+  <GameMasterForm />
+</section>
 
-        <h2 style={{ margin: "12px 0" }}>
-          What happened?
-        </h2>
-
-        <p style={{
-          color: "#c2d0df",
-          fontSize: 13,
-        }}>
-          Tell your Game Master what you've done,
-          plan your day, or ask about your quests.
-        </p>
-
-        <GameMasterForm />
-      </section>
 
       <nav style={{
         position: "fixed",
