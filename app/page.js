@@ -339,7 +339,15 @@ overflow: "hidden",
             ›
           </Link>
         </div>
-      </section>
+      <section
+  style={{
+    height: "calc(100dvh - 660px)",
+    minHeight: 120,
+    overflowY: "auto",
+    overscrollBehavior: "contain",
+    paddingBottom: 20,
+  }}
+>
 
 
       <section>
