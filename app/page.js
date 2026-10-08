@@ -156,6 +156,8 @@ export default async function Home({ searchParams }) {
     position: "relative",
     isolation: "isolate",
     background: "transparent",
+    height: "100dvh",
+overflow: "hidden",
   }}
 > 
 <div
