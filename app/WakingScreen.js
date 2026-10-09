@@ -7,7 +7,7 @@ import GameMasterForm from "./GameMasterForm";
 import LivingWorld from "./LivingWorld";
 import "./waking.css";
 
-const icons = { fitness: "⚡", cleaning: "🧹", development: "💻", general: "📜" };
+const icons = { fitness: "↗", cleaning: "✦", development: "⌘", general: "★" };
 const colors = { fitness: "#51bf85", cleaning: "#66b9e9", development: "#e98bb5", general: "#eab45f" };
 const tabs = [["home", "⌂", "Home"], ["quests", "✦", "Quests"], ["money", "◈", "Money"], ["habits", "◎", "Habits"], ["dream", "☾", "Dream"]];
 const format = (day, opts) => new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", ...opts }).format(new Date(day + "T12:00:00Z"));
@@ -17,6 +17,7 @@ export default function WakingScreen({ today, selectedDate, week, previousWeek, 
   const [gmOpen, setGmOpen] = useState(false);
   const [questsExpanded, setQuestsExpanded] = useState(false);
   const completed = quests.filter(q => q.status === "completed").length;
+  const orderedQuests = [...quests].sort((a,b) => Number(a.status === "completed") - Number(b.status === "completed"));
   const panel = tab !== "home" || questsExpanded;
   return (
     <main className="waking-app">
@@ -49,11 +50,11 @@ export default function WakingScreen({ today, selectedDate, week, previousWeek, 
           <div className="waking-quest-scroll">
             {hasError && <p className="waking-empty">Unable to load quests right now.</p>}
             {!hasError && quests.length === 0 && <div className="waking-empty">No quests for this day yet. Tell your Game Master what you're planning ✨</div>}
-            {quests.map(q => {
+            {orderedQuests.map(q => {
               const done = q.status === "completed";
               return <article className={`waking-quest ${done ? "done" : ""}`} key={q.id} style={{ "--quest-accent": colors[q.category] || colors.general }}>
                 {done ? <div className="waking-check completed">✓</div> : <form action={completeQuest.bind(null, q.id)}><button type="submit" className="waking-check" aria-label={`Complete ${q.title}`} /></form>}
-                <span className="waking-quest-icon">{icons[q.category] || "📜"}</span>
+                <span className="waking-quest-icon">{icons[q.category] || "★"}</span>
                 <div className="waking-quest-copy"><strong>{q.title}</strong><small>+{q.xp_reward} XP <span>·</span> +{q.coin_reward} coins</small></div>
                 {done && <span className="waking-done">DONE</span>}
               </article>;
