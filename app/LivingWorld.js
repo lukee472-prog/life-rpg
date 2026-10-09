@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import "./room.css";
 
 const spots = [{ x: 47, y: 66, label: "Relaxing" }, { x: 30, y: 60, label: "At the desk" }, { x: 62, y: 64, label: "Exploring" }];
 
