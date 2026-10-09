@@ -339,6 +339,8 @@ overflow: "hidden",
             ›
           </Link>
         </div>
+      </section>
+
       <section
   style={{
     height: "calc(100dvh - 660px)",
