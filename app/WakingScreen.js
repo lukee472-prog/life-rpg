@@ -14,9 +14,9 @@ const format = (day, opts) => new Intl.DateTimeFormat("en-GB", { timeZone: "UTC"
 
 export default function WakingScreen({ today, selectedDate, week, previousWeek, nextWeek, level, xp, coins, xpNeeded, progress, quests, questDates, hasError }) {
   const [tab, setTab] = useState("home");
-  const [gmOpen, setGmOpen] = useState(false);
+  const [gmOpen, setGmOpen] = useState(false);\n  const [questsExpanded, setQuestsExpanded] = useState(false);
   const completed = quests.filter(q => q.status === "completed").length;
-  const panel = tab !== "home";
+  const panel = tab !== "home" || questsExpanded;
   return (
     <main className="waking-app">
       <div className="world-backdrop" aria-hidden="true"><LivingWorld /></div>
@@ -43,7 +43,7 @@ export default function WakingScreen({ today, selectedDate, week, previousWeek, 
       <div className="waking-room-label"><span className="waking-live-dot" /> MY LITTLE CORNER OF THE WORLD</div>
 
       <section className={`waking-quest-drawer ${panel ? "panel-open" : ""}`} aria-label="Your quests">
-        <div className="waking-quest-heading"><div><span className="waking-quest-overline">{panel ? "YOUR ADVENTURE" : "TODAY'S ADVENTURE"}</span><h2>{tab === "money" ? "Money" : tab === "habits" ? "Habits" : tab === "dream" ? "Dreamscape" : "Your quests"} <span>✦</span></h2><p>{format(selectedDate, { weekday: "long", day: "numeric", month: "long" })}</p></div>{(tab === "home" || tab === "quests") && <span className="waking-quest-count">{completed}/{quests.length}</span>}</div>
+        <div className="waking-quest-heading"><div><span className="waking-quest-overline">{panel ? "YOUR ADVENTURE" : "TODAY'S ADVENTURE"}</span><h2>{tab === "money" ? "Money" : tab === "habits" ? "Habits" : tab === "dream" ? "Dreamscape" : "Your quests"} <span>✦</span></h2><p>{format(selectedDate, { weekday: "long", day: "numeric", month: "long" })}</p></div>{(tab === "home" || tab === "quests") && <span className="waking-quest-count">{completed}/{quests.length}</span>}<button type="button" className="waking-quest-toggle" onClick={() => setQuestsExpanded(v => !v)} aria-expanded={panel} aria-label={panel ? "Collapse quest panel" : "Expand quest panel"}>{panel ? "⌄ Less" : "⌃ More"}</button></div>
         {(tab === "home" || tab === "quests") ? (
           <div className="waking-quest-scroll">
             {hasError && <p className="waking-empty">Unable to load quests right now.</p>}
@@ -66,7 +66,7 @@ export default function WakingScreen({ today, selectedDate, week, previousWeek, 
         <GameMasterForm />
       </div>
       <nav className="waking-nav" aria-label="Main navigation">
-        {tabs.map(([id, icon, label]) => <button key={id} type="button" onClick={() => { setTab(id); setGmOpen(false); }} className={`waking-nav-item ${tab === id ? "active" : ""}`} aria-current={tab === id ? "page" : undefined}><span className="waking-nav-icon">{icon}</span><span>{label}</span></button>)}
+        {tabs.map(([id, icon, label]) => <button key={id} type="button" onClick={() => { setTab(id); setGmOpen(false); setQuestsExpanded(false); }} className={`waking-nav-item ${tab === id ? "active" : ""}`} aria-current={tab === id ? "page" : undefined}><span className="waking-nav-icon">{icon}</span><span>{label}</span></button>)}
       </nav>
     </main>
   );
