@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 1100" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="wall" x2="1" y2="1"><stop stop-color="#d7a57c"/><stop offset="1" stop-color="#ffe0a0"/></linearGradient>
+<linearGradient id="floor" x2=".5" y2="1"><stop stop-color="#f7ce81"/><stop offset="1" stop-color="#bd7d53"/></linearGradient>
+<linearGradient id="wood" x2="1" y2="1"><stop stop-color="#b96837"/><stop offset="1" stop-color="#6e3b36"/></linearGradient>
+<linearGradient id="blue" x2="0" y2="1"><stop stop-color="#597da9"/><stop offset="1" stop-color="#253e70"/></linearGradient>
+<pattern id="tile" width="48" height="48" patternUnits="userSpaceOnUse" patternTransform="skewY(-15)"><rect width="48" height="48" fill="none" stroke="#ac7749" stroke-width="1.5"/><path d="M0 0L48 48" stroke="#ffe3a0" opacity=".14"/></pattern>
+<pattern id="plant" width="75" height="75" patternUnits="userSpaceOnUse"><circle cx="16" cy="19" r="7" fill="#4e9d4e"/><circle cx="29" cy="12" r="9" fill="#78bb55"/><circle cx="23" cy="29" r="8" fill="#347f49"/></pattern>
+<filter id="shadow"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="glow"><feGaussianBlur stdDeviation="18"/></filter>
+</defs>
+<rect width="760" height="1100" fill="#425376"/>
+<!-- floating isometric room: back walls, right wall, floor -->
+<path d="M-55 175L377 25L818 178L377 344Z" fill="#ffd3a0"/>
+<path d="M-55 175L377 344V733L-55 571Z" fill="url(#wall)" stroke="#86515d" stroke-width="12"/>
+<path d="M377 344L818 178V574L377 733Z" fill="#c38d83" stroke="#82576b" stroke-width="12"/>
+<path d="M-55 571L377 733L818 574L383 406Z" fill="url(#floor)" stroke="#8b5560" stroke-width="15"/>
+<path d="M-55 571L377 733L818 574L383 406Z" fill="url(#tile)" opacity=".55"/>
+<path d="M-55 571L377 733L818 574L818 614L377 779L-55 613Z" fill="#8b5361"/>
+<!-- wall decorations -->
+<g stroke="#85546a" stroke-width="7"><path d="M33 277L167 231V400L33 445Z" fill="#6bb4c5"/><path d="M95 258V420M33 358L167 311" stroke="#ffebba" stroke-width="9"/></g>
+<path d="M33 277L167 231V400L33 445Z" fill="#8ed1d2" opacity=".2"/>
+<g fill="#283d69" stroke="#ffb95d" stroke-width="5"><path d="M190 229L248 210V286L190 306Z"/><path d="M266 200L324 181V256L266 275Z"/><path d="M488 278L558 252V343L488 369Z"/><path d="M594 241L675 211V315L594 345Z"/></g>
+<g fill="#ffcd73"><path d="M201 278l15-34 18 21z"/><circle cx="295" cy="224" r="15"/><path d="M506 341l20-50 21 34z"/><circle cx="632" cy="269" r="18"/></g>
+<!-- plant vines -->
+<g stroke="#347c47" stroke-width="6" fill="#58a74d"><path d="M15 190q35 65 10 100M320 105q-20 75 4 116M712 192q-25 72 0 125" fill="none"/><ellipse cx="30" cy="220" rx="12" ry="21" transform="rotate(-30 30 220)"/><ellipse cx="8" cy="247" rx="13" ry="23"/><ellipse cx="315" cy="148" rx="12" ry="22"/><ellipse cx="340" cy="172" rx="12" ry="22"/><ellipse cx="703" cy="250" rx="15" ry="25"/></g>
+<!-- bed shadow -->
+<ellipse cx="205" cy="488" rx="169" ry="65" fill="#654d62" opacity=".35" filter="url(#shadow)"/>
+<!-- isometric bed -->
+<path d="M49 373L211 310L358 369L196 435Z" fill="#765e81" stroke="#3d486a" stroke-width="10"/>
+<path d="M49 373L196 435V518L49 456Z" fill="#30486f"/><path d="M196 435L358 369V447L196 518Z" fill="#3d527c"/>
+<path d="M67 362L208 310L342 364L200 418Z" fill="#a5c1e2" stroke="#e7e0d6" stroke-width="9"/>
+<path d="M65 381L200 431L342 377V437L201 491L65 442Z" fill="#667db1"/>
+<path d="M65 381L200 431L342 377" fill="none" stroke="#d9d6e3" stroke-width="7"/>
+<path d="M76 358L141 334L183 352L118 377Z" fill="#fff0d9"/><path d="M145 331L209 308L249 328L184 352Z" fill="#f6e6cf"/>
+<!-- wardrobe -->
+<path d="M345 230L430 200V417L345 450Z" fill="#70483d" stroke="#4d3644" stroke-width="8"/><path d="M345 230L383 246V466L345 450Z" fill="#a36544"/><path d="M383 246L430 229V449L383 466Z" fill="#7f503c"/>
+<path d="M395 271L418 262V371L395 380Z" fill="#3d3b50"/><path d="M398 289l16-6m-16 23l16-6m-16 23l16-6" stroke="#d4aa6a" stroke-width="8"/>
+<!-- desk and computer -->
+<ellipse cx="610" cy="480" rx="132" ry="58" fill="#493f57" opacity=".35" filter="url(#shadow)"/>
+<path d="M483 391L642 332L738 370L577 430Z" fill="#d88b48" stroke="#693e3c" stroke-width="8"/>
+<path d="M483 391L577 430V472L483 434Z" fill="#9c583d"/><path d="M577 430L738 370V411L577 472Z" fill="#75463d"/>
+<path d="M546 341L655 303L655 375L546 413Z" fill="#202f58" stroke="#ecb65c" stroke-width="9"/>
+<path d="M557 352L646 320V368L557 399Z" fill="#3e93b3"/><path d="M571 373l20-26 18 14 24-28" stroke="#ffdb86" stroke-width="5" fill="none"/>
+<path d="M578 417L614 402L648 415L611 429Z" fill="#242f4a"/><path d="M607 394v13" stroke="#2b3552" stroke-width="7"/>
+<!-- chair -->
+<path d="M589 443L641 424L669 442L619 461Z" fill="#324265"/><path d="M619 461v69" stroke="#253554" stroke-width="10"/><path d="M581 464L624 448V503L581 519Z" fill="#253554" stroke="#121f3a" stroke-width="6"/>
+<!-- television facing sofa -->
+<path d="M12 506L119 469L119 542L12 580Z" fill="#142746" stroke="#e4a55e" stroke-width="10"/><path d="M25 513L106 485V530L25 559Z" fill="#344f79"/><path d="M41 574L108 550L146 565L80 592Z" fill="#9e603b"/>
+<!-- sofa -->
+<path d="M156 552L261 514L346 547L240 587Z" fill="#4d6792" stroke="#2a3c64" stroke-width="8"/>
+<path d="M156 552L240 587V639L156 607Z" fill="#354d78"/><path d="M240 587L346 547V601L240 639Z" fill="#263c67"/>
+<path d="M156 536L255 500L342 534L242 570Z" fill="#6c88b5"/><path d="M156 536L242 570V599L156 566Z" fill="#476795"/>
+<!-- rug and coffee table -->
+<path d="M282 553L441 494L571 546L408 608Z" fill="#e5d3ac" stroke="#8b9eb1" stroke-width="9"/>
+<path d="M311 554L441 508L543 545L408 595Z" fill="#6d88a6" opacity=".6"/>
+<path d="M329 535L413 505L472 526L389 559Z" fill="#c78550" stroke="#734e47" stroke-width="6"/>
+<path d="M329 535L389 559V583L329 559Z" fill="#8e543e"/><path d="M389 559L472 526V552L389 583Z" fill="#995a3c"/>
+<path d="M386 526l17-6 18 7-16 6Z" fill="#2b3e61"/>
+<!-- gym -->
+<g stroke="#29354d" stroke-width="9" stroke-linecap="round"><path d="M615 494v139M721 450v143M613 504l108-39M640 554l80-27M654 575l42-14"/></g>
+<g fill="#26334d"><circle cx="640" cy="554" r="18"/><circle cx="640" cy="554" r="10" fill="#52647d"/><circle cx="720" cy="527" r="20"/><circle cx="720" cy="527" r="11" fill="#52647d"/></g>
+<!-- dog bed -->
+<ellipse cx="539" cy="612" rx="72" ry="32" fill="#364d70" stroke="#213550" stroke-width="12"/><ellipse cx="539" cy="605" rx="48" ry="16" fill="#7e9bba"/><path d="M523 606q14-14 28 0" fill="none" stroke="#f3d7a4" stroke-width="8"/>
+<!-- scattered plants -->
+<g fill="#487f42" stroke="#306b3b" stroke-width="3"><path d="M75 453q-40-41-32-80 35 6 42 56 8-52 41-60 9 52-39 84Z"/><path d="M460 469q-32-40-20-73 29 6 28 45 7-38 36-48 7 45-32 75Z"/><path d="M701 359q-34-43-26-81 35 8 38 53 9-42 36-46 5 51-37 75Z"/></g>
+<g fill="#ba7049"><path d="M53 452h49l-8 35H62Z"/><path d="M444 462h41l-8 32h-24Z"/><path d="M689 352h44l-7 35h-28Z"/></g>
+<!-- ambient lighting -->
+<circle cx="358" cy="308" r="55" fill="#ffd57b" opacity=".35" filter="url(#glow)"/><circle cx="700" cy="385" r="55" fill="#ffd57b" opacity=".4" filter="url(#glow)"/>
+<g fill="#ffe0a0" stroke="#9d653e" stroke-width="5"><path d="M347 286l-14 25h40l-14-25Z"/><path d="M691 374l-13 22h37l-13-22Z"/></g>
+</svg>
