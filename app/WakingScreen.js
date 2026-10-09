@@ -30,7 +30,7 @@ export default function WakingScreen({ today, selectedDate, week, previousWeek, 
           <div className="waking-level">✦ LEVEL {level}</div>
         </div>
         <div className="waking-stats">
-          <div className="waking-stat-label"><span>⚡ {xp.toLocaleString()} / {xpNeeded.toLocaleString()} XP</span><span className="waking-coins">🪙 {coins.toLocaleString()}</span></div>
+          <div className="waking-stat-label"><span><span className="game-bolt" aria-hidden="true" /> {xp.toLocaleString()} / {xpNeeded.toLocaleString()} XP</span><span className="waking-coins"><span className="game-coin" aria-hidden="true" /> {coins.toLocaleString()}</span></div>
           <div className="waking-xp-track"><div className="waking-xp-fill" style={{ width: `${progress}%` }} /></div>
         </div>
         <div className="waking-calendar">
@@ -49,7 +49,7 @@ export default function WakingScreen({ today, selectedDate, week, previousWeek, 
         {(tab === "home" || tab === "quests") ? (
           <div className="waking-quest-scroll">
             {hasError && <p className="waking-empty">Unable to load quests right now.</p>}
-            {!hasError && quests.length === 0 && <div className="waking-empty">No quests for this day yet. Tell your Game Master what you're planning ✨</div>}
+            {!hasError && quests.length === 0 && <div className="waking-empty">No quests for this day yet. Tell your Game Master what you're planning.</div>}
             {orderedQuests.map(q => {
               const done = q.status === "completed";
               return <article className={`waking-quest ${done ? "done" : ""}`} key={q.id} style={{ "--quest-accent": colors[q.category] || colors.general }}>
