@@ -14,7 +14,8 @@ const format = (day, opts) => new Intl.DateTimeFormat("en-GB", { timeZone: "UTC"
 
 export default function WakingScreen({ today, selectedDate, week, previousWeek, nextWeek, level, xp, coins, xpNeeded, progress, quests, questDates, hasError }) {
   const [tab, setTab] = useState("home");
-  const [gmOpen, setGmOpen] = useState(false);\n  const [questsExpanded, setQuestsExpanded] = useState(false);
+  const [gmOpen, setGmOpen] = useState(false);
+  const [questsExpanded, setQuestsExpanded] = useState(false);
   const completed = quests.filter(q => q.status === "completed").length;
   const panel = tab !== "home" || questsExpanded;
   return (
