@@ -1,0 +1,24 @@
+/* Layer-based room renderer: all pieces can be upgraded independently. */
+.layered-room{position:absolute;inset:0;overflow:hidden;background:linear-gradient(140deg,#f9d8a3,#d79b75 75%)}
+.layered-floor{position:absolute;left:-28%;top:22%;width:155%;height:92%;background-color:#c99062;background-image:repeating-linear-gradient(0deg,transparent 0 45px,#9e653f6b 46px 48px),repeating-linear-gradient(90deg,transparent 0 46px,#f7d3a273 47px 49px);transform:rotate(-19deg) skew(18deg,4deg);border:10px solid #8c5b44;box-shadow:inset 0 0 90px #5e3b3b40}
+.layered-walls{position:absolute;inset:0 0 45%;pointer-events:none}
+.wall-left{position:absolute;left:-2%;top:0;width:53%;height:100%;background:linear-gradient(120deg,#f9d9b4,#dba889);clip-path:polygon(0 5%,100% 24%,100% 100%,0 75%);border-left:8px solid #a76850}
+.wall-right{position:absolute;right:-1%;top:0;width:53%;height:100%;background:linear-gradient(125deg,#d7a18a,#f3c9a2);clip-path:polygon(0 24%,100% 5%,100% 75%,0 100%)}
+.room-window{position:absolute;left:13%;top:23%;width:24%;height:35%;background:linear-gradient(140deg,#79c9dc,#aed7f5);border:9px solid #f5e2bc;box-shadow:5px 7px 0 #9b6857;transform:skewY(13deg)}
+.room-window:after{content:"";position:absolute;left:50%;top:0;height:100%;border-left:5px solid #f5e2bc}
+.furniture{position:absolute;width:1px;height:1px;z-index:2;filter:drop-shadow(4px 9px 3px #48334566)}
+.furniture-object{position:absolute;display:block;transform:translate(-50%,-50%);box-sizing:border-box}
+.furniture-bed .furniture-object{width:155px;height:100px;border:9px solid #855d60;border-radius:13px;background:linear-gradient(130deg,#a3b9da 0 50%,#728fb6 51%);box-shadow:0 17px 0 #6e4c58;transform:translate(-50%,-50%) rotate(-17deg) skew(8deg)}
+.furniture-bed .furniture-object:before{content:"";position:absolute;left:8px;top:6px;width:65px;height:30px;border-radius:8px;background:#f4e9db;box-shadow:0 3px 0 #d5b9b1}
+.furniture-sofa .furniture-object{width:140px;height:63px;border-radius:15px;background:#42618a;border:8px solid #2e4a72;box-shadow:0 17px 0 #253c5d;transform:translate(-50%,-50%) rotate(-17deg)}
+.furniture-sofa .furniture-object:before{content:"";position:absolute;left:-4px;top:-24px;width:132px;height:31px;border-radius:12px;background:#6689ae;border:5px solid #2e4a72}
+.furniture-tv .furniture-object{width:108px;height:68px;border:9px solid #23364f;border-radius:6px;background:#263b59;box-shadow:0 8px 0 #17243b;transform:translate(-50%,-50%) rotate(-17deg)}
+/* The television screen faces the sofa; the viewer sees its rear shell. */
+.furniture-tv .furniture-object:after{content:"";position:absolute;left:39px;bottom:-30px;width:11px;height:23px;background:#23364f;box-shadow:-20px 23px 0 -3px #23364f,20px 23px 0 -3px #23364f}
+.furniture-desk .furniture-object{width:130px;height:56px;border:7px solid #744b43;background:#bc8255;box-shadow:0 27px 0 -8px #6c4746;transform:translate(-50%,-50%) rotate(-17deg)}
+.furniture-desk .furniture-object:before{content:"";position:absolute;left:44px;top:-55px;width:62px;height:45px;background:#256d94;border:7px solid #253c5d;box-shadow:0 6px 0 #1a2e4c}
+.furniture-gym .furniture-object{width:114px;height:15px;background:#34445a;border:5px solid #1f2b3b;border-radius:6px;transform:translate(-50%,-50%) rotate(-17deg);box-shadow:0 26px 0 -2px #28384a}
+.furniture-gym .furniture-object:before{content:"";position:absolute;left:6px;top:-31px;width:9px;height:72px;background:#34445a;box-shadow:78px 0 #34445a}
+.furniture-gym .furniture-object:after{content:"";position:absolute;left:-9px;top:-20px;width:34px;height:34px;border-radius:50%;background:#253247;box-shadow:88px 0 #253247}
+.life-room-isometric .life-room-avatar{z-index:5}.life-room-isometric .life-room-dog{z-index:5}
+@media(max-width:500px){.layered-room{font-size:12px}.furniture{scale:.83}.furniture-bed{scale:.9}.furniture-gym{scale:.8}}
