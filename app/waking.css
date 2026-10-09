@@ -28,3 +28,49 @@
 .waking-stats{margin-top:7px;padding:8px 11px}
 .waking-tint{background:linear-gradient(180deg,rgba(35,35,65,.42) 0%,rgba(35,35,65,.02) 34%,rgba(28,31,49,.01) 58%,rgba(29,30,52,.55) 87%,rgba(29,30,52,.87) 100%)}
 @media(max-height:700px){.waking-quest-drawer{height:115px}.waking-quest-drawer.panel-open{height:min(49dvh,340px)}}
+
+/* Approved colourful game-HUD direction: dark blue, gold, and bright quest cards. */
+.waking-app{background:#253b60;color:#fff}
+.waking-tint{background:linear-gradient(180deg,rgba(9,25,50,.35),transparent 32%,transparent 68%,rgba(5,24,48,.35) 90%)}
+.waking-top{padding-left:12px;padding-right:12px}
+.waking-brand-row{background:#07345be8;border:2px solid #478ac4;border-radius:20px;padding:6px 10px;box-shadow:0 4px 0 #09294c,0 8px 18px #0c244c77}
+.waking-eyebrow{display:none}
+.waking-title{font-size:22px;letter-spacing:-.8px}
+.waking-level{background:#173e73;border-color:#7da7db;padding:6px 10px}
+.waking-stats{margin-top:5px;background:#0b3763ed;border:2px solid #5b9bdb;border-radius:18px;padding:7px 12px;box-shadow:0 4px 0 #082649}
+.waking-xp-fill{background:linear-gradient(90deg,#ffe873,#ffb932)}
+.waking-calendar{background:#08365feF;border:2px solid #548bc6;color:#f5f9ff;border-radius:15px;padding:4px 6px 2px;margin-top:8px;box-shadow:0 5px 0 #08294c}
+.waking-calendar-top{display:none}
+.waking-arrow{color:#b5d8ff}
+.waking-day{color:#c5dfff}
+.waking-day.selected{background:linear-gradient(#ffe780,#ffb51f);color:#172f56;box-shadow:0 3px 0 #ad7014}
+.waking-day.is-today:not(.selected){background:#23609c;color:#fff}
+.waking-room-label{display:none}
+.waking-quest-drawer{height:clamp(135px,21dvh,184px);bottom:calc(130px + env(safe-area-inset-bottom));padding:8px 10px 6px;border:3px solid #3884c5;border-radius:22px;background:linear-gradient(#074477f5,#06325ef5);color:#fff;box-shadow:0 5px 0 #08274d,0 12px 30px #061b3e99;backdrop-filter:blur(9px)}
+.waking-quest-drawer.panel-open{height:min(52dvh,450px)}
+.waking-quest-heading{margin-bottom:7px;min-height:35px}
+.waking-quest-overline{display:none}
+.waking-quest-heading h2{font-size:20px;color:#fff;text-shadow:0 2px 0 #0a2a4f}
+.waking-quest-heading h2 span{color:#ffcf4d}
+.waking-quest-heading p{display:none}
+.waking-quest-count{background:#ffc739;color:#15315a;border:2px solid #ffdf7a;font-size:11px}
+.waking-quest-toggle{background:#176eb7;border:2px solid #56b4ff;color:#fff;border-radius:12px;padding:7px 10px}
+.waking-quest-scroll{padding:0 1px 6px}
+.waking-quest{min-height:56px;margin-bottom:6px;border:2px solid #a5ddff;border-left:0;border-radius:13px;padding:6px 8px;background:linear-gradient(110deg,#b8efff,#ebfaff);color:#122f54;box-shadow:0 3px 0 #18578d}
+.waking-quest:nth-child(4n + 1){background:linear-gradient(110deg,#b0f4bf,#e7ffe5);border-color:#65c785}
+.waking-quest:nth-child(4n + 2){background:linear-gradient(110deg,#b9dfff,#edf6ff);border-color:#75b8f0}
+.waking-quest:nth-child(4n + 3){background:linear-gradient(110deg,#ffd6ae,#fff0d8);border-color:#ffb47e}
+.waking-quest:nth-child(4n + 4){background:linear-gradient(110deg,#dfc4ff,#f4e9ff);border-color:#b99bea}
+.waking-quest.done{opacity:1}
+.waking-check{border-radius:8px;border:2px solid #316ba0;background:#fff;min-width:25px}
+.waking-check.completed{background:#27c779;border-color:#0a9956}
+.waking-quest-icon{display:grid;place-items:center;width:34px;height:34px;flex-shrink:0;background:linear-gradient(#339ee9,#1758a3);border:2px solid #0c4a85;border-radius:10px;color:#fff;font-size:21px;font-weight:900;text-shadow:0 2px #0c4a85}
+.waking-quest-copy strong{font-size:12px;font-weight:900}
+.waking-quest.done strong{text-decoration:none}
+.waking-quest-copy small{color:#345c91;font-size:10px}
+.waking-done{color:#087647}
+.waking-gm{bottom:calc(66px + env(safe-area-inset-bottom));background:#063763f5;border:2px solid #54a7e4;border-radius:16px;box-shadow:0 4px 0 #092746;padding:2px 9px}
+.waking-nav{background:#052d55f7;border-top:2px solid #3188ce}
+.waking-nav-item{color:#bdd6f3}
+.waking-nav-item.active{color:#ffcb45}
+@media(max-height:700px){.waking-quest-drawer{height:132px}.waking-quest-drawer.panel-open{height:min(50dvh,360px)}}
