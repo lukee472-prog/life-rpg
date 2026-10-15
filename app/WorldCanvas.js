@@ -4,7 +4,7 @@ import LivingWorld from "./LivingWorld";
 import "./world-canvas.css";
 
 // Waking Life is the full-screen environment, not a card or framed image.
-// Add the approved illustration as public/world/starter-bedroom.webp to activate it.
+// Add the approved illustration as public/world/D6162B35-0720-4E71-948D-5BEAB77BEDAD.png to activate it.
 export default function WorldCanvas() {
   const [artAvailable, setArtAvailable] = useState(true);
   return (
