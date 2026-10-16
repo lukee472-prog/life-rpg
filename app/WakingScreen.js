@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { completeQuest } from "./action";
 import GameMasterForm from "./GameMasterForm";
-import LivingWorld from "./LivingWorld";
+import WorldCanvas from "./WorldCanvas";
 import "./waking.css";
 
 const icons = { fitness: "↗", cleaning: "✦", development: "⌘", general: "★" };
@@ -21,7 +21,7 @@ export default function WakingScreen({ today, selectedDate, week, previousWeek, 
   const panel = tab !== "home" || questsExpanded;
   return (
     <main className="waking-app">
-      <div className="world-backdrop" aria-hidden="true"><LivingWorld /></div>
+      <div className="world-backdrop" aria-hidden="true"><WorldCanvas /></div>
       <div className="waking-tint" aria-hidden="true" />
 
       <header className="waking-top">
