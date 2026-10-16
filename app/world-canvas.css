@@ -1,16 +1,30 @@
-.waking-world{position:absolute;inset:0;overflow:hidden;pointer-events:none;isolation:isolate;background:linear-gradient(180deg,#88b6c8 0%,#b5d8bd 48%,#80b67d 100%)}
-.waking-world-land{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 78%,#9fc88b 0 30%,#78a66f 68%,#628e6b 100%)}
-.waking-world-ground{position:absolute;width:120vmax;height:62vmax;left:50%;top:63%;transform:translate(-50%,-15%) rotate(-24deg);border-radius:25%;background:repeating-linear-gradient(0deg,transparent 0 35px,#ffffff09 35px 36px),linear-gradient(120deg,#86b47c,#a9cc91)}
-.waking-world-room{position:absolute;left:50%;top:51%;width:min(78vw,420px);aspect-ratio:1312/1199;transform:translate(-50%,-50%);filter:drop-shadow(0 18px 14px #274c3770)}
-.waking-world-art{width:100%;height:100%;object-fit:contain;display:block}
-.waking-world-fallback{position:absolute;inset:0;overflow:visible}.waking-world-fallback .life-room{width:100%;height:100%}
-.waking-world-life{position:absolute;left:50%;top:51%;width:min(78vw,420px);aspect-ratio:1312/1199;transform:translate(-50%,-50%);pointer-events:none}
-.waking-world-person{position:absolute;left:51%;top:67%;width:22px;height:45px;transform-origin:50% 100%;animation:waking-idle 8s ease-in-out infinite;filter:drop-shadow(2px 4px 2px #243b3b66)}
-.waking-world-person-head{position:absolute;top:0;left:4px;width:16px;height:17px;border:2px solid #4c3130;border-radius:44%;background:#d49b72}
-.waking-world-person-body{position:absolute;top:15px;left:1px;width:21px;height:27px;border:2px solid #233a4e;border-radius:6px 6px 4px 4px;background:linear-gradient(#477da4 0 60%,#263e60 60%)}
-.waking-world-pet{position:absolute;left:63%;top:76%;width:30px;height:15px;border:2px solid #81472b;border-radius:50% 50% 40% 40%;background:#bb713f;animation:waking-pet-idle 5s ease-in-out infinite}
-.waking-world-pet-ear{position:absolute;left:20px;top:-7px;width:12px;height:13px;background:#a65e34;border-radius:50%}
-@keyframes waking-idle{0%,18%,100%{transform:translate(0,0)}30%,52%{transform:translate(12px,-4px)}65%,80%{transform:translate(-8px,3px)}}
-@keyframes waking-pet-idle{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(3px,-2px) rotate(3deg)}}
-@media(min-width:700px){.waking-world-room,.waking-world-life{width:min(44vw,550px)}}
-@media(prefers-reduced-motion:reduce){.waking-world-person,.waking-world-pet{animation:none}}
+/* Waking Life world viewport. The room is an isolated isometric object,
+   not a rectangular card; no simulated grass, gradients or CSS furniture. */
+.waking-world {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #253b60;
+}
+.waking-world-room {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: min(78vw, 420px);
+  aspect-ratio: 1279 / 1169;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 12px 12px rgba(0,0,0,.25));
+}
+.waking-world-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Remove the dark image corners at display time, matching the cutaway
+     room's six-sided outer silhouette. A real alpha asset will replace this. */
+  clip-path: polygon(47.2% 0%, 0% 26%, 0% 61%, 50.6% 99.5%, 100% 71%, 100% 32%);
+}
+@media (min-width: 700px) {
+  .waking-world-room { width: min(44vw, 550px); }
+}
