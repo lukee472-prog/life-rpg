@@ -13,7 +13,7 @@ export default function WorldCanvas() {
       <div className="waking-world-ground" />
       <div className="waking-world-room">
         {artAvailable ? (
-          <img className="waking-world-art" src="/world/starter-bedroom.webp" alt="" onError={() => setArtAvailable(false)} draggable="false" />
+          <img className="waking-world-art" src="/world/D6162B35-0720-4E71-948D-5BEAB77BEDAD.png" alt="" onError={() => setArtAvailable(false)} draggable="false" />
         ) : (
           <div className="waking-world-fallback"><LivingWorld /></div>
         )}
